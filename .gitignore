@@ -1,0 +1,72 @@
+# ------------------------------------------------------------------
+# AI QA Platform — public repository ignore rules
+# Task instances, run outputs and local settings must never be committed.
+# ------------------------------------------------------------------
+
+# Task instances (generated artifacts, evidence, journals, customer inputs)
+platform/tasks/*
+!platform/tasks/.gitkeep
+
+# Cross-task / generated reports
+reports/*
+!reports/.gitkeep
+
+# Playwright MCP runtime output (snapshots, screenshots, console logs)
+.playwright-mcp/*
+!.playwright-mcp/.gitkeep
+!.playwright-mcp/README.md
+
+# Claude Code local-only settings and session data
+.claude/settings.local.json
+.claude/todos/
+.claude/logs/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*credentials*.json
+*secret*.json
+
+# Dependencies and build output
+node_modules/
+target/
+build/
+dist/
+.gradle/
+
+# Playwright / Allure / test outputs
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+allure-results/
+allure-report/
+*.trace.zip
+trace.zip
+
+# Office documents and binaries (customer material must stay out of the repo)
+*.docx
+*.xlsx
+*.pptx
+*.vsdx
+*.pdf
+.~lock.*#
+
+# IDE / OS
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and temp
+*.log
+*.tmp
+tmp/
+temp/

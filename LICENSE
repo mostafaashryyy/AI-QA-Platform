@@ -1,0 +1,66 @@
+PROPRIETARY LICENSE — ALL RIGHTS RESERVED
+
+Copyright (c) 2026 Mostafa Ashry. All rights reserved.
+
+This repository, including but not limited to its source code, skills, prompts,
+workflow definitions, schemas, templates, scaffolds, documentation, diagrams and
+any other content (collectively, the "Material"), is the exclusive property of the
+copyright holder and is protected by copyright and other intellectual property laws.
+
+1. PERMITTED USE
+
+   The Material is made publicly visible solely so that it can be viewed in a web
+   browser on the hosting platform (for example, GitHub) for portfolio and
+   evaluation purposes. Viewing the Material in this way is the only use permitted.
+
+2. RESTRICTIONS
+
+   Without the prior express written permission of the copyright holder, you may
+   NOT, in whole or in part:
+
+   a. copy, download for reuse, reproduce, or store the Material, except for the
+      transient copies a web browser or the hosting platform makes automatically
+      while you view it, and a fork created by the hosting platform's fork function
+      to the extent its terms of service require it;
+   b. modify, adapt, translate, or create derivative works based on the Material;
+   c. distribute, publish, sublicense, sell, lease, lend, or otherwise make the
+      Material available to any third party;
+   d. use the Material, including any skill, prompt, workflow, schema, template or
+      scaffold, in your own projects, products, services, or AI systems, whether
+      personal, internal, academic, or commercial;
+   e. use the Material for any commercial purpose;
+   f. use the Material to train, fine-tune, evaluate, or benchmark any machine
+      learning or AI model;
+   g. remove, alter, or obscure any copyright notice or this license.
+
+3. NO LICENSE GRANTED
+
+   No license or right is granted to you, by implication, estoppel, or otherwise,
+   under any copyright, patent, trademark, trade secret, or other intellectual
+   property right of the copyright holder, except the limited right to view stated
+   in Section 1. Public visibility of this repository does not constitute
+   publication under an open-source license. This is NOT open-source software.
+
+4. CONTRIBUTIONS
+
+   Unsolicited contributions (issues, pull requests, patches, or suggestions) do not
+   create any rights for the contributor in the Material. The copyright holder is
+   under no obligation to accept, review, or use any contribution.
+
+5. THIRD-PARTY NAMES
+
+   Product names referenced in the Material (for example, Claude Code, Playwright,
+   Selenium, SHAFT, TestNG, Maven, Node.js, OWASP) belong to their respective
+   owners. Their mention implies no affiliation or endorsement, and this license
+   does not cover any third-party software, which remains subject to its own terms.
+
+6. DISCLAIMER OF WARRANTY AND LIABILITY
+
+   THE MATERIAL IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES,
+   OR OTHER LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE MATERIAL.
+
+7. PERMISSION REQUESTS
+
+   To request permission for any use not permitted above, contact the copyright
+   holder through the contact details on the repository owner's profile.

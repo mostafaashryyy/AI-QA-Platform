@@ -1,0 +1,423 @@
+{
+  "_about": "TEMPLATE, not a runtime event. Stage-specific constants of the qa-final-report skill for each event type. Values that are null or '<runtime…>' MUST be filled from the actual execution (system clock, real paths, real hashes, the real report data object). Never fabricated. Conforms to platform/schemas/journal-event.schema.json (v1.8.0) once filled. revision_request and approval_decision also require the common runtime fields shown in stage_execution (event_id, step_number, attempt, workflow_run_id, task_id, timestamp, decisions, revision). workflow_run_id is READ from journal/workflow-run.json (active_run_id), never created by the skill. Array examples show one item's shape; runtime arrays contain exactly the real items (possibly none). The stage is read-only for every upstream artifact: each source SHA-256 at the end must equal the hash recorded in final_report.sources (QFR-V14). Recommendation values in the journal use underscores (CONDITIONAL_GO, NO_GO, INSUFFICIENT_EVIDENCE); the reports show them with spaces.",
+  "stage_execution": {
+    "schema_version": "1.8.0",
+    "event_id": "<runtime: EVT-NNNN, next sequence in execution-log.json>",
+    "event_type": "stage_execution",
+    "step_number": null,
+    "attempt": null,
+    "workflow_run_id": "<runtime: journal/workflow-run.json → active_run_id; never created by the skill>",
+    "task_id": "<runtime>",
+    "timestamp": "<runtime: system clock, UTC>",
+    "stage_id": "qa-final-report",
+    "stage_name": "QA Final Report",
+    "skill_name": "qa-final-report",
+    "skill_version": "1.0.0",
+    "prompt_id": "qa-final-report",
+    "prompt_version": "1.0.0",
+    "prompt_variables": {
+      "task_name": "<runtime>",
+      "task_path": "<runtime>",
+      "workflow_run_id": "<runtime>"
+    },
+    "trigger": {
+      "reason": "<runtime: first report | refresh after new upstream results | revision>",
+      "initiated_by": "user",
+      "user_message": "<runtime: verbatim, secrets redacted>",
+      "redactions": null
+    },
+    "input_references": [
+      {
+        "path": "<task>/test-design/TestCases.md",
+        "role": "upstream_artifact",
+        "status": "read",
+        "sha256": "<runtime>",
+        "referenced_by": null,
+        "notes": "<runtime: version; approved scope (denominator)>"
+      },
+      {
+        "path": "journal:EVT-NNNN",
+        "role": "upstream_approval",
+        "status": "read",
+        "sha256": null,
+        "referenced_by": null,
+        "notes": "<runtime: TEST_REVIEW_APPROVED, current (S1–S5)>"
+      },
+      {
+        "path": "<task>/execution/ExecutionReport.md",
+        "role": "upstream_artifact",
+        "status": "<runtime: read | missing | unreadable | not_applicable>",
+        "sha256": "<runtime or null>",
+        "referenced_by": null,
+        "notes": "<runtime: version; approval and currency, or 'Not performed'>"
+      },
+      {
+        "path": "<task>/prd/PRD.md",
+        "role": "task_prd",
+        "status": "read",
+        "sha256": "<runtime>",
+        "referenced_by": null,
+        "notes": "Requirement IDs; release criteria if documented"
+      },
+      {
+        "path": "<task>/context/TaskContext.md",
+        "role": "task_metadata",
+        "status": "read",
+        "sha256": null,
+        "referenced_by": null,
+        "notes": "Identity only"
+      },
+      {
+        "path": ".claude/prompts/qa-final-report.md",
+        "role": "prompt",
+        "status": "read",
+        "sha256": "<runtime: SHA-256 of the LF-normalized text>",
+        "referenced_by": null,
+        "notes": null
+      }
+    ],
+    "source_references": [],
+    "tools_used": [
+      {
+        "tool": "<runtime: file read / hash / parse / write tools>",
+        "purpose": "Discover, hash and parse sources; render and validate both report formats",
+        "targets": [
+          "<task>/reports/QA-Final-Report.md",
+          "<task>/reports/QA-Final-Report.html"
+        ]
+      }
+    ],
+    "mcp_used": {
+      "used": false,
+      "servers": [],
+      "intentionally_not_used": [
+        {
+          "server": "playwright",
+          "reason": "The final report is built from recorded artifacts only; no live application access."
+        }
+      ]
+    },
+    "actions": [
+      "<runtime>"
+    ],
+    "decisions": [
+      {
+        "decision": "<runtime: e.g. recommendation CONDITIONAL_GO (rule 3)>",
+        "rationale": "<runtime: the deciding facts with their sources>"
+      }
+    ],
+    "revision": null,
+    "output_artifacts": [
+      {
+        "path": "<task>/reports/QA-Final-Report.md",
+        "operation": "<runtime: created | updated>",
+        "artifact_status": "draft",
+        "artifact_version": "<runtime: report version>",
+        "sha256": "<runtime>",
+        "summary": "<runtime: recommendation; headline counts>"
+      },
+      {
+        "path": "<task>/reports/QA-Final-Report.html",
+        "operation": "<runtime: created | updated>",
+        "artifact_status": "draft",
+        "artifact_version": "<runtime: report version>",
+        "sha256": "<runtime>",
+        "summary": "Same report data object as the Markdown file"
+      }
+    ],
+    "final_report": {
+      "sources": [
+        {
+          "stage_id": "<runtime: e.g. test-design>",
+          "artifact": "<runtime: e.g. TestCases.md>",
+          "path": "<runtime: task-relative path, or null when not performed>",
+          "artifact_version": "<runtime or null>",
+          "sha256": "<runtime or null>",
+          "produced_by_event_id": "<runtime: EVT-NNNN or null>",
+          "approval_event_id": "<runtime: EVT-NNNN or null>",
+          "approval_current": "<runtime: true | false | null (ungated)>",
+          "availability": "<runtime: available | placeholder | not_performed | missing | unreadable>",
+          "discovered_by": "<runtime: journal | workflow | search | null>",
+          "line_ending_only_difference": false,
+          "notes": null
+        }
+      ],
+      "run_ids": {
+        "latest": [
+          {
+            "binding_id": "<runtime>",
+            "test_case_id": "TC-NNN",
+            "run_id": "<runtime>",
+            "outcome": "<runtime: passed | failed | not_run | harness_failed>"
+          }
+        ],
+        "history": [],
+        "excluded": []
+      },
+      "metrics": {
+        "approved_cases": null,
+        "in_execution_scope": null,
+        "automation_candidates": null,
+        "requirements": {
+          "mapping_available": false,
+          "total": null,
+          "covered": null
+        },
+        "manual": {
+          "performed": false,
+          "approved_report": null,
+          "executed": null,
+          "pass": null,
+          "fail": null,
+          "blocked": null,
+          "not_executed": null,
+          "reconciled": null
+        },
+        "automation": [],
+        "defects": {
+          "total": null,
+          "open": null,
+          "withdrawn": null,
+          "unconfirmed_application_failures": null,
+          "by_severity": {},
+          "by_priority": {},
+          "by_status": {}
+        },
+        "healing": {
+          "investigated": null,
+          "attempts": null,
+          "fixed": null,
+          "not_fixed": null,
+          "escalated": null,
+          "not_healed_application_defect": null,
+          "remaining_unresolved": null
+        }
+      },
+      "inconsistencies": [],
+      "risks": [],
+      "recommendation": {
+        "value": "<runtime: GO | CONDITIONAL_GO | NO_GO | INSUFFICIENT_EVIDENCE>",
+        "rule": "<runtime: 1–4>",
+        "release_policy": null,
+        "rationale": "<runtime>",
+        "blocking_issues": [],
+        "conditions": [],
+        "required_actions": []
+      },
+      "outputs": {
+        "report_version": "<runtime>",
+        "markdown": {
+          "path": "<task>/reports/QA-Final-Report.md",
+          "sha256": "<runtime>"
+        },
+        "html": {
+          "path": "<task>/reports/QA-Final-Report.html",
+          "sha256": "<runtime>"
+        },
+        "formats_consistent": "<runtime: QFR-V04 result>"
+      }
+    },
+    "assumptions": [],
+    "gaps": [
+      {
+        "id": "<runtime: e.g. GAP-QFR-01>",
+        "summary": "<runtime: stage not performed / artifact missing>",
+        "related": null
+      }
+    ],
+    "open_questions": [],
+    "validation": {
+      "performed": true,
+      "overall": "<runtime: pass | fail | partial>",
+      "checks": [
+        { "check_id": "QFR-V01", "description": "Prerequisites verified before analysis", "result": "<runtime>", "notes": null },
+        { "check_id": "QFR-V02", "description": "Both report files exist; HTML parses", "result": "<runtime>", "notes": null },
+        { "check_id": "QFR-V03", "description": "11 sections, in order, in both files", "result": "<runtime>", "notes": null },
+        { "check_id": "QFR-V04", "description": "Markdown and HTML data objects and visible figures identical", "result": "<runtime>", "notes": null },
+        { "check_id": "QFR-V05", "description": "Every metric sourced; percentages show numerator and denominator", "result": "<runtime>", "notes": null },
+        { "check_id": "QFR-V06", "description": "Manual and automation separate; no double counting; excluded runs not used", "result": "<runtime>", "notes": null },
+        { "check_id": "QFR-V07", "description": "Executed = PASS + FAIL + BLOCKED; Approved = Executed + NOT_EXECUTED (or QINC)", "result": "<runtime>", "notes": null },
+        { "check_id": "QFR-V08", "description": "Defect counts match BugReports.md; severity and priority separate; no duplicates", "result": "<runtime>", "notes": null },
+        { "check_id": "QFR-V09", "description": "Fixed healing attempts have a passing verification run", "result": "<runtime>", "notes": null },
+        { "check_id": "QFR-V10", "description": "Blocked, not executed, out-of-scope and unavailable items visible", "result": "<runtime>", "notes": null },
+        { "check_id": "QFR-V11", "description": "Recommendation valid, rule-based and fully justified", "result": "<runtime>", "notes": null },
+        { "check_id": "QFR-V12", "description": "Risks sourced or analysis-derived; inconsistencies complete", "result": "<runtime>", "notes": null },
+        { "check_id": "QFR-V13", "description": "Cited IDs exist; links resolve; no withheld evidence linked", "result": "<runtime>", "notes": null },
+        { "check_id": "QFR-V14", "description": "No upstream artifact modified (hashes start = end)", "result": "<runtime>", "notes": null },
+        { "check_id": "QFR-V15", "description": "No credential value or e-mail address in either output", "result": "<runtime>", "notes": null },
+        { "check_id": "QFR-V16", "description": "Exactly one Markdown and one HTML report, no copies", "result": "<runtime>", "notes": null }
+      ]
+    },
+    "status": "<runtime: awaiting_approval | blocked | failed>",
+    "stop_reason": "HARD STOP: QA Final Report awaiting human review. Exact key required: QA_FINAL_REPORT_APPROVED",
+    "approval_required": true,
+    "approval_key": "QA_FINAL_REPORT_APPROVED",
+    "approval_outcome": null,
+    "next_stage": {
+      "stage_id": "reporting",
+      "unlocked": false,
+      "condition": "Exact standalone QA_FINAL_REPORT_APPROVED on a current report (F1–F4). reporting is a planned stage; the QA workflow is complete once the report is approved."
+    },
+    "errors": [],
+    "fixes": [],
+    "evidence": [],
+    "notes": null
+  },
+  "revision_request": {
+    "schema_version": "1.8.0",
+    "event_type": "revision_request",
+    "stage_id": "qa-final-report",
+    "stage_name": "QA Final Report",
+    "skill_name": "qa-final-report",
+    "skill_version": "1.0.0",
+    "prompt_id": null,
+    "prompt_version": null,
+    "trigger": {
+      "reason": "Human requested changes to the QA Final Report",
+      "initiated_by": "user",
+      "user_message": "<runtime: verbatim change request, secrets redacted>",
+      "redactions": null
+    },
+    "input_references": [
+      {
+        "path": "<task>/reports/QA-Final-Report.md",
+        "role": "previous_version_of_output",
+        "status": "read",
+        "sha256": "<runtime>",
+        "referenced_by": null,
+        "notes": null
+      }
+    ],
+    "source_references": [],
+    "tools_used": [],
+    "mcp_used": {
+      "used": false,
+      "servers": [],
+      "intentionally_not_used": [
+        {
+          "server": "playwright",
+          "reason": "Change request only."
+        }
+      ]
+    },
+    "actions": [],
+    "decisions": [],
+    "revision": null,
+    "output_artifacts": [],
+    "assumptions": [],
+    "gaps": [],
+    "open_questions": [],
+    "validation": {
+      "performed": false,
+      "overall": "not_applicable",
+      "checks": []
+    },
+    "status": "revision_requested",
+    "stop_reason": "Revision requested; the report will be regenerated and validated before approval is requested again",
+    "approval_required": true,
+    "approval_key": "QA_FINAL_REPORT_APPROVED",
+    "approval_outcome": null,
+    "next_stage": {
+      "stage_id": "qa-final-report",
+      "unlocked": false,
+      "condition": "Revised report generated and validated"
+    },
+    "errors": [],
+    "fixes": [],
+    "evidence": [],
+    "notes": null
+  },
+  "approval_decision": {
+    "schema_version": "1.8.0",
+    "event_type": "approval_decision",
+    "stage_id": "qa-final-report",
+    "stage_name": "QA Final Report",
+    "skill_name": "qa-final-report",
+    "skill_version": "1.0.0",
+    "prompt_id": null,
+    "prompt_version": null,
+    "trigger": {
+      "reason": "Human replied at the QA Final Report gate",
+      "initiated_by": "user",
+      "user_message": "<runtime: verbatim reply>",
+      "redactions": null
+    },
+    "input_references": [
+      {
+        "path": "<task>/reports/QA-Final-Report.md",
+        "role": "previous_version_of_output",
+        "status": "read",
+        "sha256": "<runtime: must equal the latest stage_execution output hash (F1)>",
+        "referenced_by": null,
+        "notes": null
+      },
+      {
+        "path": "<task>/reports/QA-Final-Report.html",
+        "role": "previous_version_of_output",
+        "status": "read",
+        "sha256": "<runtime: must equal the latest stage_execution output hash (F1)>",
+        "referenced_by": null,
+        "notes": null
+      }
+    ],
+    "source_references": [],
+    "tools_used": [],
+    "mcp_used": {
+      "used": false,
+      "servers": [],
+      "intentionally_not_used": [
+        {
+          "server": "playwright",
+          "reason": "Gate decision only."
+        }
+      ]
+    },
+    "actions": [],
+    "decisions": [],
+    "revision": null,
+    "output_artifacts": [
+      {
+        "path": "<task>/reports/QA-Final-Report.md",
+        "operation": "<runtime: updated (Status → Approved) | unchanged>",
+        "artifact_status": "<runtime: approved | draft>",
+        "artifact_version": "<runtime: unchanged by approval>",
+        "sha256": "<runtime: POST-update hash; used to detect a stale approval (F1)>",
+        "summary": null
+      },
+      {
+        "path": "<task>/reports/QA-Final-Report.html",
+        "operation": "<runtime: updated (Status → Approved) | unchanged>",
+        "artifact_status": "<runtime: approved | draft>",
+        "artifact_version": "<runtime: unchanged by approval>",
+        "sha256": "<runtime: POST-update hash>",
+        "summary": null
+      }
+    ],
+    "final_report": "<runtime: the full final_report block of the latest stage_execution, with outputs updated to the post-approval hashes>",
+    "assumptions": [],
+    "gaps": [],
+    "open_questions": [],
+    "validation": {
+      "performed": true,
+      "overall": "<runtime>",
+      "checks": [
+        { "check_id": "QFR-G01", "description": "Reply is exactly QA_FINAL_REPORT_APPROVED, standalone", "result": "<runtime>", "notes": null },
+        { "check_id": "QFR-G02", "description": "Report current (F1–F4)", "result": "<runtime>", "notes": null }
+      ]
+    },
+    "status": "<runtime: approved | approval_not_accepted>",
+    "stop_reason": "<runtime>",
+    "approval_required": true,
+    "approval_key": "QA_FINAL_REPORT_APPROVED",
+    "approval_outcome": "<runtime: accepted | not_accepted>",
+    "next_stage": {
+      "stage_id": "reporting",
+      "unlocked": "<runtime: true only when accepted>",
+      "condition": "<runtime: QA workflow complete for this run | reason the key was not accepted>"
+    },
+    "errors": [],
+    "fixes": [],
+    "evidence": [],
+    "notes": null
+  }
+}
